@@ -53,7 +53,7 @@ Follow these steps to set up the development environment and run the project loc
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com
+git clone https://github.com/Rafaeldovale/credit-risk-assessment
 cd credit-risk-assessment
 ```
 
