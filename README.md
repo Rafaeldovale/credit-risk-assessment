@@ -1,47 +1,53 @@
-# Credit Risk Assessment Project
+# 🏦 Credit Risk Assessment Project
 
-## Project Overview
+<!-- Tech Stack Badges -->
+![Python](https://shields.io)
+![FastAPI](https://shields.io)
+![Docker](https://shields.io)
+![Scikit-Learn](https://shields.io)
+
+## 📌 Project Overview
 This repository contains an End-to-End Classic Machine Learning solution designed to predict the Probability of Default (PD) for credit applicants. The objective is to minimize financial losses by identifying high-risk customers before credit approval.
 
 ```text
 credit-risk-assessment/
 │
 ├── data/
-│   ├── raw/                  <-- Cole aqui o 'application_train.csv' baixado
-│   └── processed/            <-- Onde salvaremos os dados limpos depois
+│   ├── raw/                  <-- Store 'GermanCredit.csv' here
+│   └── processed/            <-- Cleaned data will be saved here
 │
-├── src/                      <-- Todo o código fonte em Inglês (EN-US)
+├── src/                      <-- Source code (EN-US)
 │   ├── __init__.py
-│   ├── data_pipeline.py      <-- Limpeza e tratamento dos dados
-│   ├── train.py              <-- Treinamento do modelo clássico
-│   └── app.py                <-- Nossa API com FastAPI
+│   ├── data_pipeline.py      <-- Data cleaning & processing
+│   ├── train.py              <-- Model training script
+│   └── app.py                <-- FastAPI application
 │
-├── notebook/                 <-- Para seus testes e análises visuais
+├── notebook/                 <-- Interactive Jupyter Notebooks
 │   └── exploration.ipynb
 │
-├── Dockerfile                <-- Configuração do Docker
-├── requirements.txt          <-- Bibliotecas do Python
-└── README.md                 <-- Documentação do projeto
+├── Dockerfile                <-- Docker configuration
+├── requirements.txt          <-- Python dependencies
+└── README.md                 <-- Project documentation
 ```
 
-## Business Problem & Metrics
+## 📊 Business Problem & Metrics
 In credit scoring, misclassifying a defaulting customer as a good payer (**False Negative**) is significantly more expensive than misclassifying a good payer as a defaulter (**False Positive**). 
 
 Therefore, our modeling strategy prioritizes optimizing:
-- **Recall / Sensitivity**: To capture as many defaulters as possible.
-- **ROC-AUC**: To evaluate the model's capability to distinguish between classes.
-- **KS (Kolmogorov-Smirnov)**: To measure the maximum separation between good and bad risk distributions.
+- 🎯 **Recall / Sensitivity**: To capture as many defaulters as possible.
+- 📈 **ROC-AUC**: To evaluate the model's capability to distinguish between classes.
+- 📉 **KS (Kolmogorov-Smirnov)**: To measure the maximum separation between good and bad risk distributions.
 
-## Tech Stack
+## 🛠️ Tech Stack
 - **Language:** Python 3.10+
-- **Machine Learning:** Scikit-Learn, LightGBM / XGBoost
+- **Machine Learning:** Scikit-Learn
 - **API Framework:** FastAPI
 - **Containerization:** Docker
 
-## Project Architecture
+## 📐 Project Architecture
 Refer to the folder structure outlined in the repository root to navigate through data pipelines, model training, and API deployment steps.
 
-## How to Run
+## 🚀 How to Run
 
 Follow these steps to set up the development environment and run the project locally.
 
@@ -76,5 +82,5 @@ pip install -r requirements.txt
 ### 4. Run the Jupyter Notebook
 Open VS Code, navigate to `notebook/exploration.ipynb`, select the project `venv` kernel, and start coding!
 
-
-Developed by Rafael Bezerra do Vale Data Scientist | Machine Learning Specialist
+---
+Developed by **Rafael Bezerra do Vale** | *Data Scientist & Machine Learning Specialist*
