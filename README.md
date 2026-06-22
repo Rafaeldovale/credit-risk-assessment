@@ -16,6 +16,9 @@ credit-risk-assessment/
 │   ├── raw/                  <-- Store 'GermanCredit.csv' here
 │   └── processed/            <-- Cleaned data will be saved here
 │
+├── models/                   <-- Store serialized model binaries (.joblib)
+│   └── credit_lgb_champion.joblib
+│
 ├── src/                      <-- Source code (EN-US)
 │   ├── __init__.py
 │   ├── data_pipeline.py      <-- Data cleaning & processing
