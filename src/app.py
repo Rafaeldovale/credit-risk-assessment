@@ -4,6 +4,8 @@ from pydantic import BaseModel
 import joblib
 import logging  # 1. Import the native logging library
 import os
+import pandas as pd
+
 
 # 2. Configure the logging system pipeline layout
 logging.basicConfig(
@@ -22,7 +24,9 @@ class CreditApplication(BaseModel):
     amount: float
     duration: float
     age: float
-
+    status: str
+    credit_history: str
+    saving: str
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -60,30 +64,30 @@ def home():
 
 
 # 3. Inject logs inside our execution endpoint
+# 3. Secure and clean Predict Route
 @app.post("/predict")
 def predict_credit(application: CreditApplication):
     if "credit_model" not in ml_models:
         logging.error("Prediction failed: Model artifact not loaded in RAM.")
         return {"error": "Machine Learning model is not loaded in memory."}
 
+    # 1. Capture the 3 numeric features
+    features_array = [application.duration, application.amount, application.age]
+
+    # 2. Add 45 zeros to complete the exact 48 columns expected by LightGBM
+    padding_zeros = [0.0] * 45
+    full_input_matrix = [features_array + padding_zeros]
+
+    # 3. Fetch the model from RAM and execute prediction
     model = ml_models["credit_model"]
-    total_features_expected = model.n_features_in_
-    features_array = [0.0] * total_features_expected
+    prediction = int(model.predict(full_input_matrix))
 
-    features_array[0] = application.duration
-    features_array[1] = application.amount
-    features_array[2] = application.age
-
-    input_data = [features_array]
-
-    prediction = int(model.predict(input_data))
+    # 4. Map the output to a business decision
     decision = "Approved" if prediction == 1 else "Denied"
 
-    # 4. Generate the structured auditing log line text
+    # 5. Log the structured audit line
     logging.info(
-        f"CREDIT_EVALUATION | Amount: {application.amount} | "
-        f"Duration: {application.duration} meses | Age: {application.age} anos | "
-        f"Decision: {decision}"
+        f"CREDIT_EVALUATION | Amount: {application.amount} | Age: {application.age} | Decision: {decision}"
     )
 
     return {
@@ -95,3 +99,4 @@ def predict_credit(application: CreditApplication):
             "age": application.age,
         },
     }
+
